@@ -9,7 +9,7 @@ async function fetchFixtures() {
         "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST as string,
         "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
       },
-      params: { team: "49", season: "2022" },
+      params: { team: "49", season: "2021" },
     })
     .then((res) => {
       return res.data.response;
