@@ -15,6 +15,7 @@ async function fetchFixtures() {
       return res.data.response;
     });
 
+  console.log(process.env.NEXT_PUBLIC_RAPID_API_HOST);
   // convert object of objects to array of objects
   let data = Object.keys(dataObj).map((key) => {
     return dataObj[key];
