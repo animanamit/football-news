@@ -2,6 +2,8 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 async function fetchFixtures() {
+  console.log(process.env.NEXT_PUBLIC_RAPID_API_HOST);
+
   const dataObj = await axios
     .get("https://api-football-v1.p.rapidapi.com/v3/fixtures", {
       method: "GET",
@@ -15,7 +17,6 @@ async function fetchFixtures() {
       return res.data.response;
     });
 
-  console.log(process.env.NEXT_PUBLIC_RAPID_API_HOST);
   // convert object of objects to array of objects
   let data = Object.keys(dataObj).map((key) => {
     return dataObj[key];
