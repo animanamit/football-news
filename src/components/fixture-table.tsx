@@ -17,7 +17,7 @@ async function fetchFixtures() {
       return res.data.response;
     });
 
-  // convert object of objects to array of objects
+  // convert object of object to array of objects
   let data = Object.keys(dataObj).map((key) => {
     return dataObj[key];
   });
