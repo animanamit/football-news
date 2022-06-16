@@ -25,20 +25,24 @@ const TeamBio = () => {
 
   if (isLoading)
     return (
-      <div>
-        <h4>Loading...</h4>
+      <div className="rounded-xl w-4/5 h-52 relative">
+        <h4 className="text-white absolute font-semibold tracking-wide uppercase right-4 bottom-7 text-7xl opacity-60">
+          Loading...
+        </h4>
       </div>
     );
 
   if (error)
     return (
-      <div>
-        <h4>Error! Please reload this page!</h4>
+      <div className="rounded-xl w-4/5 h-52 relative">
+        <h4 className="text-white absolute font-semibold tracking-wide uppercase right-4 bottom-7 text-7xl opacity-60">
+          Error! Please reload this page!
+        </h4>
       </div>
     );
 
   return (
-    <div className=" rounded-xl w-4/5 h-52 relative">
+    <div className="rounded-xl w-4/5 h-52 relative">
       <div className="h-full w-full overflow-hidden">
         <img
           src={data.venue.image}
