@@ -38,20 +38,16 @@ const TeamBio = () => {
     );
 
   return (
-    <div className="bg-teal-300 rounded-xl w-72">
-      <div className="h-full w-full">
+    <div className=" rounded-xl w-4/5 h-52 relative">
+      <div className="h-full w-full overflow-hidden">
         <img
           src={data.venue.image}
           alt={`${data.team.name}'s home ground`}
-          className="w-full rounded-t-xl h-full"
+          className="w-full rounded-xl h-full object-cover overflow-hidden opacity-80"
         />
       </div>
-      <div className="text-white p-4">
+      <div className="text-white absolute font-semibold tracking-wide uppercase right-4 bottom-7 text-7xl opacity-60">
         <h5>{data.team.name}</h5>
-
-        <h5>{data.venue.name}</h5>
-        <h5>{data.venue.city}</h5>
-        <h5>{data.team.country}</h5>
       </div>
     </div>
   );

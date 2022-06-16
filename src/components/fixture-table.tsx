@@ -37,7 +37,9 @@ const FixtureTable: any = () => {
   if (error)
     return (
       <div className="h-72 rounded-xl py-2 px-4 w-80 bg-pink-300 overflow-scroll">
-        <h4 className="text-red-500">Error! Please reload this page!</h4>
+        <h4 className="uppercase tracking-loose text-xl leading-10 font-semibold text-slate-200 text-center py-2">
+          Error! Please reload this page!
+        </h4>
       </div>
     );
 
@@ -45,7 +47,7 @@ const FixtureTable: any = () => {
     if (data == [] || data.length == 0) {
       return (
         <div className="h-72 rounded-xl py-2 px-4 w-80 bg-pink-300 overflow-scroll">
-          <h4 className="text-red-500">
+          <h4 className="uppercase tracking-loose text-xl leading-10 font-semibold text-slate-200 text-center py-2">
             Latest fixture dates have not been been released yet!
           </h4>
         </div>
@@ -53,13 +55,13 @@ const FixtureTable: any = () => {
     }
 
     return (
-      <div className="h-[400px] rounded-xl py-2 px-4 w-[380px] bg-[rgba(23,12,61,0.5)] overflow-hidden hover:transition-transform duration-120 hover:translate-y-[-3px] shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-sm">
+      <div className="h-[400px] flex flex-col rounded-xl py-2 px-4 w-1/3 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
         <div className="">
           <h4 className="uppercase tracking-loose text-3xl leading-10 font-semibold text-slate-200 text-center py-2">
             UPCOMING Fixtures
           </h4>
         </div>
-        <div className="flex flex-col justify-center space-y-2 overflow-scroll h-full ">
+        <div className="flex flex-col justify-center space-y-2 overflow-hidden scroll">
           {data.map((item: any, index: number) => {
             return (
               <div
