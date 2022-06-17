@@ -57,7 +57,7 @@ const TeamBio = () => {
           className="w-full rounded-xl h-full object-cover overflow-hidden opacity-80"
         />
       </div>
-      <div className="text-white absolute font-semibold tracking-wide uppercase right-4 bottom-7 text-7xl opacity-60">
+      <div className="text-white absolute font-semibold tracking-wide uppercase right-4 bottom-7 text-5xl opacity-60">
         <h5>{data.team.name}</h5>
       </div>
     </div>
