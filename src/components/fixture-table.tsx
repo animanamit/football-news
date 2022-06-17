@@ -55,25 +55,27 @@ const FixtureTable: any = () => {
     }
 
     return (
-      <div className="h-[400px] flex flex-col rounded-xl py-2 px-4 w-1/3 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
+      <div className="h-[400px] flex flex-col rounded-xl pt-2 pb-6 px-4 w-1/3 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
         <div className="">
           <h4 className="uppercase tracking-loose text-3xl leading-10 font-semibold text-slate-200 text-center py-2">
             UPCOMING Fixtures
           </h4>
         </div>
-        <div className="flex flex-col justify-center space-y-2 overflow-hidden scroll">
-          {data.map((item: any, index: number) => {
-            return (
-              <div
-                key={index}
-                className=" text-white bg-transparent duration-120 rounded-lg p-4 flex justify-center uppercase hover:shadow-md hover:bg-white/10 hover:shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] "
-              >
-                <h5>
-                  {item.teams.home.name} vs {item.teams.away.name}
-                </h5>
-              </div>
-            );
-          })}
+        <div className="flex-1 overflow-scroll">
+          <div className="flex flex-col justify-center space-y-2 overflow-scroll">
+            {data.map((item: any, index: number) => {
+              return (
+                <div
+                  key={index}
+                  className=" text-white bg-transparent duration-120 rounded-lg p-4 flex justify-center uppercase hover:shadow-md hover:bg-white/10 hover:shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] "
+                >
+                  <h5>
+                    {item.teams.home.name} vs {item.teams.away.name}
+                  </h5>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
