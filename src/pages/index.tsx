@@ -4,6 +4,19 @@ import FixtureTable from "../components/fixture-table";
 import Standings from "../components/standings";
 import TeamBio from "../components/team-bio";
 // import { trpc } from "../utils/trpc";
+import create from "zustand";
+
+interface AppState {
+  teamId: number;
+  season: number;
+  setTeamId: (newId: number) => void;
+}
+
+export const useStore = create<AppState>()((set) => ({
+  teamId: 49,
+  season: 2021,
+  setTeamId: (newId) => set((state) => ({ teamId: newId })),
+}));
 
 const Home: NextPage = () => {
   // const hello = trpc.useQuery(["hello", { text: "from tRPC" }]);

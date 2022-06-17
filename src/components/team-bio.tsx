@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { useStore } from "../pages";
 
-async function fetchBio(): Promise<any> {
+async function fetchBio({ queryKey }: any): Promise<any> {
+  const [_key, obj] = queryKey;
   const data = await axios
     .get("https://api-football-v1.p.rapidapi.com/v3/teams", {
       method: "GET",
@@ -9,7 +11,7 @@ async function fetchBio(): Promise<any> {
         "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST as string,
         "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
       },
-      params: { id: "49" },
+      params: { id: obj.teamId },
     })
     .then((res) => {
       return res.data.response[0];
@@ -21,7 +23,12 @@ async function fetchBio(): Promise<any> {
 }
 
 const TeamBio = () => {
-  const { data, error, isLoading } = useQuery("bio", fetchBio);
+  const teamId = useStore((state: { teamId: number }) => state.teamId);
+
+  const { data, error, isLoading } = useQuery(
+    ["bio", { teamId: teamId }],
+    fetchBio
+  );
 
   if (isLoading)
     return (

@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { useStore } from "../pages";
 
-async function fetchFixtures() {
+async function fetchFixtures({ queryKey }: any) {
+  const [_key, obj] = queryKey;
+
   const dataObj = await axios
     .get("https://api-football-v1.p.rapidapi.com/v3/fixtures", {
       method: "GET",
@@ -9,7 +12,7 @@ async function fetchFixtures() {
         "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST as string,
         "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
       },
-      params: { team: "49", season: "2021" },
+      params: { team: obj.teamId, season: obj.season },
     })
     .then((res) => {
       return res.data.response;
@@ -22,8 +25,18 @@ async function fetchFixtures() {
   return data;
 }
 
-const FixtureTable: any = () => {
-  const { data, error, isLoading } = useQuery("fixtures", fetchFixtures);
+interface FP {
+  teamId: number;
+}
+
+const FixtureTable: any = (props: FP) => {
+  const season = useStore((state: { season: number }) => state.season);
+  const teamId = useStore((state: { teamId: number }) => state.teamId);
+
+  const { data, error, isLoading } = useQuery(
+    ["fixtures", { season: season, teamId: teamId }],
+    fetchFixtures
+  );
 
   if (isLoading)
     return (

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { useStore } from "../pages";
 
-async function fetchLeagueStandings() {
+async function fetchLeagueStandings({ queryKey }: any) {
+  const [_key, obj] = queryKey;
   try {
     const [dataObj] = await axios
       .get("https://api-football-v1.p.rapidapi.com/v3/standings", {
@@ -10,7 +12,7 @@ async function fetchLeagueStandings() {
           "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST as string,
           "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
         },
-        params: { league: "39", season: "2021" },
+        params: { league: "39", season: obj.season },
       })
       .then((res) => {
         console.log(res.data.response);
@@ -23,9 +25,16 @@ async function fetchLeagueStandings() {
   }
 }
 
+interface AppState {
+  teamId: number;
+  season: number;
+  setTeamId: (newId: number) => void;
+}
+
 const Standings = () => {
+  const season = useStore((state: { season: number }) => state.season);
   const { data, error, isLoading } = useQuery(
-    "standings",
+    ["standings", { season: season }],
     fetchLeagueStandings
   );
 
@@ -72,6 +81,8 @@ const Standings = () => {
       </div>
     );
   }
+
+  return <></>;
 };
 
 export default Standings;
