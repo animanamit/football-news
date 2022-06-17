@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import FixtureTable from "../components/fixture-table";
+import Standings from "../components/standings";
 import TeamBio from "../components/team-bio";
 // import { trpc } from "../utils/trpc";
 
@@ -22,7 +23,10 @@ const Home: NextPage = () => {
       <div className="flex flex-col justify-center bg-gradient-to-b from-blue-300 to-yellow-100 min-h-screen">
         <div className="w-3/5 mx-auto flex flex-col items-center justify-center mt-8">
           <TeamBio />
-          <FixtureTable />
+          <div className="flex w-4/5 space-x-2">
+            <FixtureTable />
+            <Standings />
+          </div>
         </div>
 
         {/* <div className="w-fit">
