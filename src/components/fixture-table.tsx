@@ -25,11 +25,7 @@ async function fetchFixtures({ queryKey }: any) {
   return data;
 }
 
-interface FP {
-  teamId: number;
-}
-
-const FixtureTable: any = (props: FP) => {
+const FixtureTable: any = () => {
   const season = useStore((state: { season: number }) => state.season);
   const teamId = useStore((state: { teamId: number }) => state.teamId);
 
@@ -41,7 +37,7 @@ const FixtureTable: any = (props: FP) => {
   if (isLoading)
     return (
       <div className="h-fit flex flex-col rounded-xl py-2 px-4 w-1/3 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
-        <h4 className="uppercase tracking-loose text-xl leading-10 font-semibold text-slate-200 text-center py-2">
+        <h4 className="py-2 text-xl font-semibold leading-10 text-center uppercase tracking-loose text-slate-200">
           Loading...
         </h4>
       </div>
@@ -50,7 +46,7 @@ const FixtureTable: any = (props: FP) => {
   if (error)
     return (
       <div className="h-fit flex flex-col rounded-xl py-2 px-4 w-1/3 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
-        <h4 className="uppercase tracking-loose text-xl leading-10 font-semibold text-slate-200 text-center py-2">
+        <h4 className="py-2 text-xl font-semibold leading-10 text-center uppercase tracking-loose text-slate-200">
           Error! Please reload this page!
         </h4>
       </div>
@@ -60,7 +56,7 @@ const FixtureTable: any = (props: FP) => {
     if (data == [] || data.length == 0) {
       return (
         <div className="h-[400px] flex flex-col rounded-xl py-2 px-4 w-1/3 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
-          <h4 className="uppercase tracking-loose text-xl leading-10 font-semibold text-slate-200 text-center py-2">
+          <h4 className="py-2 text-xl font-semibold leading-10 text-center uppercase tracking-loose text-slate-200">
             Latest fixture dates have not been been released yet!
           </h4>
         </div>
@@ -70,7 +66,7 @@ const FixtureTable: any = (props: FP) => {
     return (
       <div className="h-[400px] flex flex-col rounded-xl pt-2 pb-6 px-4 flex-1 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
         <div className="">
-          <h4 className="uppercase tracking-loose text-3xl leading-10 font-semibold text-slate-200 text-center py-2">
+          <h4 className="py-2 text-3xl font-semibold leading-10 text-center uppercase tracking-loose text-slate-200">
             UPCOMING Fixtures
           </h4>
         </div>

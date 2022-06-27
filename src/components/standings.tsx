@@ -41,7 +41,7 @@ const Standings = () => {
   if (isLoading)
     return (
       <div className="h-fit flex flex-col rounded-xl py-2 px-4 w-1/3 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
-        <h4 className="uppercase tracking-loose text-xl leading-10 font-semibold text-slate-200 text-center py-2">
+        <h4 className="py-2 text-xl font-semibold leading-10 text-center uppercase tracking-loose text-slate-200">
           Loading...
         </h4>
       </div>
@@ -50,7 +50,7 @@ const Standings = () => {
   if (error)
     return (
       <div className="h-fit flex flex-col rounded-xl py-2 px-4 w-1/3 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
-        <h4 className="uppercase tracking-loose text-xl leading-10 font-semibold text-slate-200 text-center py-2">
+        <h4 className="py-2 text-xl font-semibold leading-10 text-center uppercase tracking-loose text-slate-200">
           Error! Please reload this page!
         </h4>
       </div>
@@ -60,11 +60,11 @@ const Standings = () => {
     return (
       <div className="h-[400px] flex flex-col rounded-xl pt-2 pb-6 px-4 flex-1 mt-2 bg-[rgba(23,12,61,0.4)] overflow-hidden  shadow-[rgb(255 255 255 / 20%) 0px 0px 0px 0.5px inset] backdrop-blur-md">
         <div className="">
-          <h4 className="uppercase tracking-loose text-3xl leading-10 font-semibold text-slate-200 text-center py-2">
+          <h4 className="py-2 text-3xl font-semibold leading-10 text-center uppercase tracking-loose text-slate-200">
             League Standings
           </h4>
         </div>
-        <div className="flex-1 ">
+        <div className="flex-1 overflow-y-scroll">
           <div className="flex flex-col justify-center space-y-2 ">
             {data.standings[0].map((item: any, index: number) => {
               return (
