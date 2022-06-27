@@ -1,1 +1,1 @@
-export default function fetchFixtures() {}
+export default function fetchFixtures(season: number, teamId: number) {}

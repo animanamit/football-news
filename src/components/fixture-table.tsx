@@ -1,35 +1,41 @@
-import axios from "axios";
 import { useQuery } from "react-query";
-import { AnyZodObject } from "zod";
 import { useStore } from "../pages";
 
 type Fixture = {
   fixture: object;
   goals: object;
   league: object;
-  teams: object;
+  teams: {
+    home: {
+      name: string;
+    };
+    away: {
+      name: string;
+    };
+  };
   score: object;
 };
 
 async function fetchFixtures(season: number, teamId: number) {
-  const dataObj = await axios
-    .get("https://api-football-v1.p.rapidapi.com/v3/fixtures", {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST as string,
-        "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
-      },
-      params: { team: teamId, season: season },
-    })
-    .then((res) => {
-      return res.data.response;
-    });
+  let url = new URL("https://api-football-v1.p.rapidapi.com/v3/fixtures");
+  url.searchParams.append("team", teamId.toString());
+  url.searchParams.append("season", season.toString());
 
-  // convert object of object to array of objects
+  const dataObj = await fetch(url.toString(), {
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST as string,
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => data.response);
+
+  // console.log(dataObj);
+  /** convert object of object to array of objects **/
   let data = Object.keys(dataObj).map((key) => {
     return dataObj[key];
   });
-
   return data;
 }
 
@@ -71,7 +77,7 @@ const FixtureTable = () => {
         </div>
         <div className="flex-1 overflow-scroll">
           <div className="flex flex-col justify-center space-y-2 overflow-scroll">
-            {data.map((item: any, index: number) => {
+            {data.map((item: Fixture, index: number) => {
               return (
                 <div
                   key={index}
