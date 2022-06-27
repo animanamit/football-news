@@ -21,6 +21,7 @@ async function fetchBio(teamId: number) {
 type TeamData = {
   team: {
     name: string;
+    id: number;
   };
   venue: {
     image: string;
