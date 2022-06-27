@@ -31,7 +31,6 @@ async function fetchFixtures(season: number, teamId: number) {
     .then((res) => res.json())
     .then((data) => data.response);
 
-  // console.log(dataObj);
   /** convert object of object to array of objects **/
   let data = Object.keys(dataObj).map((key) => {
     return dataObj[key];
