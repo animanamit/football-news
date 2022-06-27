@@ -1,28 +1,27 @@
-import axios from "axios";
 import { useQuery } from "react-query";
 import { useStore } from "../pages";
 
-async function fetchLeagueStandings({ queryKey }: any) {
-  const [_key, obj] = queryKey;
-  try {
-    const [dataObj] = await axios
-      .get("https://api-football-v1.p.rapidapi.com/v3/standings", {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST as string,
-          "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
-        },
-        params: { league: "39", season: obj.season },
-      })
-      .then((res) => {
-        console.log(res.data.response);
-        return res.data.response;
-      });
-    let { league } = dataObj;
-    return league;
-  } catch (error) {
-    return error;
-  }
+interface TeamPosition {
+  team: {
+    name: string;
+  };
+}
+
+async function fetchLeagueStandings(season: number) {
+  let url = new URL("https://api-football-v1.p.rapidapi.com/v3/standings");
+  url.searchParams.append("league", "39");
+  url.searchParams.append("season", season.toString());
+
+  const data = await fetch(url.toString(), {
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": process.env.NEXT_PUBLIC_RAPID_API_HOST as string,
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => data.response[0].league.standings[0]);
+  return data;
 }
 
 interface AppState {
@@ -33,9 +32,9 @@ interface AppState {
 
 const Standings = () => {
   const season = useStore((state: { season: number }) => state.season);
-  const { data, error, isLoading } = useQuery(
-    ["standings", { season: season }],
-    fetchLeagueStandings
+  const { data, error, isLoading } = useQuery<TeamPosition[], Error>(
+    ["standings", season],
+    () => fetchLeagueStandings(season)
   );
 
   if (isLoading)
@@ -66,7 +65,7 @@ const Standings = () => {
         </div>
         <div className="flex-1 overflow-y-scroll">
           <div className="flex flex-col justify-center space-y-2 ">
-            {data.standings[0].map((item: any, index: number) => {
+            {data.map((item: TeamPosition, index: number) => {
               return (
                 <div
                   key={index}
